@@ -1002,7 +1002,7 @@ gst_kvs_sink_handle_sink_event (GstCollectPads *pads,
             metadata_value = std::string(gst_structure_get_string(structure, KVS_ADD_METADATA_VALUE));
             is_persist = persistent;
 
-            bool result = data->kinesis_video_stream->putFragmentMetadata(metadata_name, metadata_value, is_persist);
+            bool result = data->kinesis_video_stream->putEventMetadata(STREAM_EVENT_TYPE_NOTIFICATION | STREAM_EVENT_TYPE_IMAGE_GENERATION, NULL);
             if (!result) {
                 LOG_WARN("Failed to putFragmentMetadata. name: " << metadata_name << ", value: " << metadata_value << ", persistent: " << is_persist);
             }
